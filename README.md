@@ -12,3 +12,12 @@ To get started with training your own model with the CAST dataset, download and 
 
 To start using CounterfactualVLA, download the checkpoint and follow the instructions for inference in the `cast-vla` repo.
 
+Once the inference server has been launched using `cast-vla`, you can launch the robot side client script
+
+```
+cd deployment
+./navigate_vla.sh '-s <ngrok server address> -w <number of steps to use in generated action chunk> --prompt "your prompt"'
+```
+
+
+
