@@ -1,0 +1,8 @@
+A small mobile robot is moving through an environment and observes this environment with a fisheye camera. 
+You will be a sequence of two images observed by the robot with the fisheye camera. 
+The first is the *previous* observation of the robot and the second is the *current* observation of the robot.
+Describe the *current* image, noting any objects, structures, people, or other factors that might help the robot localize. 
+Be specific about which objects are close to the robot, which are far and on which side of the field of view they are located. 
+Given the previous observation in the context, also describe how the robot's observation has changed from the previous time step, 
+keeping in mind social behaviors and reasons for how the robot may be moving in the environment. 
+Return the `image_description` in your response as well as this path to the image in the `path` field: {path}

@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "unique_id": {
+      "type": "string",
+      "description": "Trajectory identifier from the prompt (folder name_start_end)."
+    },
+    "best": {
+      "type": "array",
+      "description": "Original instruction candidates that best match odometry and observations.",
+      "items": { "type": "string" }
+    },
+    "new": {
+      "type": "array",
+      "description": "New short instructions consistent with the trajectory and observations.",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["unique_id", "best", "new"]
+}

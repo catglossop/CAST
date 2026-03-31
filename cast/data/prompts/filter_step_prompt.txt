@@ -1,0 +1,18 @@
+A small mobile robot is moving through an environment and observes this environment with a fisheye camera.
+
+The atomic steps executed by the robot are {labels} and the original instructions that corresponds to the trajectory are {orig_instructions}. 
+
+The atomic steps based only on the robot odometry and therefore will not provide information on the environment. The original instructions proposed correspond to the trajectory based only on the robot observations and therefore will not have information grounded in the actual odometry of the robot except for what can be deduced from images.
+
+Which of the noisy original instructions makes the most sense given the actions and the observation? Additionally, provide a simple new language instruction that makes sense given the provided information. 
+
+The instructions must be shorter than 5-10 words and be specific about key landmarks and motions rather than vaguely describing the trajectory. Limit the verbs to `move` `follow`, `turn`. 
+
+Good examples:  "Move down the corridor on the left side", "Move towards the table", "Move past the green couch on the left", "Move towards at the doorway", "Follow along the left side of the hallway"
+
+Bad examples: "Turn left and then turn right, and move past the table and then turn right", "Move the hallway and then move to the carpet and then turn left" 
+
+Format the response based on the response schema json with the keys 'best' and 'new'. The best field should contain a list of strings that correspond to the best original instructions. The new field should contain a list that corresponds to new instructions. 
+
+
+Additionally include this `unique_id`: {unique_id} in the corresponding output field.

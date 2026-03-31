@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "unique_id": {
+      "type": "string",
+      "description": "Trajectory and segment identifier from the prompt."
+    },
+    "counterfactual_action_instruction": {
+      "type": "array",
+      "description": "List of counterfactual actions and instructions.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "counterfactual_action": {
+            "type": "string",
+            "description": "Low-level action label at the branch point (e.g. go forward)."
+          },
+          "counterfactual_instruction": {
+            "type": "string",
+            "description": "Natural-language instruction for the alternative."
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "Why this alternative is plausible given the scene."
+          }
+        },
+        "required": [
+          "counterfactual_action",
+          "counterfactual_instruction",
+          "reasoning"
+        ]
+      }
+    }
+  },
+  "required": ["unique_id", "counterfactual_action_instruction"]
+}

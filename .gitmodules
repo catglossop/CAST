@@ -4,3 +4,6 @@
 [submodule "cast-vla"]
 	path = cast-vla
 	url = git@github.com:catglossop/cast-vla.git
+[submodule "cast/diffusion_policy"]
+	path = cast/diffusion_policy
+	url = https://github.com/catglossop/diffusion_policy.git

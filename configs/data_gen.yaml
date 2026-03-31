@@ -1,0 +1,51 @@
+debug: False
+
+# Input information
+dataset_path: "/path/to/dataset/root"
+image_sampling_rate: 3 # Subsampling of images in each trajectory
+data_config_path: "/path/to/data_config.yaml" # template is stored in `cast/atomic_model/configs/data_config.yaml`
+
+# Gemini config
+model_version: "gemini-2.5-pro" # Model version to use for generation
+project_id: "your-project-id" # Project ID to use for generation
+
+# Local output information
+output_dir: "/path/to/output" # Where to save the output
+
+# Data info (GCS)
+gcp_project_id: "your-project-id"
+gcp_region: "your-region"
+base_uri: "your-base-uri"
+blob_root: "cast"
+
+# Atomic decomposition
+min_turn_thres: 0.9
+max_adjust_thres: 0.5
+min_adjust_thres: 0.1
+min_forward_thres: 0.5
+max_atomic_chunk_length: 10
+datasets: ["sacson", "seattle", "tartan_drive", "cory_hall", "scand", "go_stanford", "recon"]
+
+# Hindsight labeling
+hindsight_describe_prompt: "/path/to/hindsight_describe_prompt.txt"
+hindsight_summarize_prompt: "/path/to/hindsight_summarize_prompt.txt"
+hindsight_describe_schema: "/path/to/hindsight_describe_schema.json"
+hindsight_summarize_schema: "/path/to/hindsight_summarize_schema.json"
+min_traj_len: 10
+max_traj_len: 30
+
+# Filtering
+filter_step_prompt: "/path/to/filter_step_prompt.txt"
+filter_step_schema: "/path/to/filter_step_schema.json"
+
+# Counterfactual generation
+cf_step_prompt: "/path/to/cf_step_prompt.txt"
+cf_step_schema: "/path/to/cf_step_schema.json"
+
+# Inference device for the atomic action model.
+device: "cuda:0"
+
+action_model:
+  # Directory containing `{checkpoint}.pth`
+  model_config: /path/to/atomic_model.yaml
+  model_path: /path/to/atomic_policy_checkpoint.pth

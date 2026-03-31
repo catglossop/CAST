@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "properties": {
+        "image_description": {
+            "type": "string",
+            "description": "A description of the image observation of the robot, noting the objects, structures, people, or other factors that might help the robot localize. This description should be a single sentence and be concise (1 sentence, 5 -15 words)."
+        },
+        "path": {
+            "type": "string",
+            "description": "The path to the image file provided in the prompt."
+        }
+    },
+    "required": ["image_description", "path"]
+}

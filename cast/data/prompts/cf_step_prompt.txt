@@ -1,0 +1,19 @@
+A small mobile robot with a fisheye camera navigates indoor and outdoor spaces. You are provided an observation part way through the trajectory. The sequence of low-level odometry-derived actions for this trajectory up to this point are {labels}. The high-level language instructions associated with the entire trajectory are {instructions}.
+
+The provided image is the observation at the start of the atomic action {curr_atomic_action}, the action that the robot is currently executing. 
+
+Observe objects, structures, and free space relative to the robot. Propose several distinct short-horizon counterfactual endings to the trajectory or alternative endings: ways the robot could have behaved differently 
+(e.g.,  move towards an object in the scene, favour a side of the corridor, arc around an obstacle, or move away from an area) while staying plausible for the scene. 
+
+You must ensure that these alternatives distinctly map to an atomic action in {base_actions} (ie. only one alternative should map to 'go forward', only one should 'turn left')
+but you do not have to include an alternative ending for each atomic action, only those that are most possible or practical from the current observation.
+
+Provide as output the counterfactual actions and instructions in as a list of actions (from the possible atomic action strings) and instructions in `counterfactual_action_instruction` in the `counterfactual_action` and `counterfactual_instruction` fields. 
+
+The instructions must be shorter than 5-10 words and be specific about key landmarks and motions rather than vaguely describing the trajectory. Limit the verbs to `move` `follow`, `turn`. 
+
+Good examples:  "Move down the corridor on the left side", "Move towards the table", "Move past the green couch on the left", "Move towards at the doorway", "Follow along the left side of the hallway"
+
+Bad examples: "Turn left and then turn right, and move past the table and then turn right", "Move the hallway and then move to the carpet and then turn left" 
+
+Return JSON matching the response schema with keys unique_id and counterfactual_instructions. The unique_id in your response must be exactly: {unique_id}

@@ -1,0 +1,18 @@
+A small mobile robot is moving through an environment and observes this environment with a fisheye camera. 
+
+Here is a list of descriptions of sequential images observed by the robot: [{instructions}]. 
+Describe the trajectory of the robot in the environment based on these descriptions. 
+
+The 'instructions' key should contain a list of possible instructions that describe the trajectory, using following formats as a guideline for how you might format the output, in a concise, 
+single sentence way that takes the form of an instruction to the robot: {formats}. 
+
+Each instruction should describe the *entire trajectory* but might focus on different landmarks, different motions, or just describe the trajectory in a different way. The `reasoning` key should contain a reasoning for why these instructions make sense for the trajectory. 
+
+The instructions must be shorter than 5-10 words and be specific about key landmarks and motions rather than vaguely describing the trajectory. Limit the verbs to `move` `follow`, `turn`. 
+
+Good examples:  "Move down the corridor on the left side", "Move towards the table", "Move past the green couch on the left", "Move towards at the doorway", "Follow along the left side of the hallway"
+
+Bad examples: "Turn left and then turn right, and move past the table and then turn right", "Move the hallway and then move to the carpet and then turn left" 
+
+Be specific about the direction of turns the robot makes, the relative position of the robot to landmarks and structures in the environment.
+Additionally return this unique_id in the field `unique_id` : {unique_id}.

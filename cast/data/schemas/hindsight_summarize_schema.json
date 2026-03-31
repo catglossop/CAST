@@ -1,0 +1,22 @@
+{
+    "type": "object",
+    "properties": {
+        "instructions": {
+            "type": "array",
+            "description": "A list of possible instructions that describe the trajectory in the following formats in a concise, single sentence way that takes the form of an instruction to the robot. Be specific about the direction of turns the robot makes, the relative position of the robot to landmarks and structures in the environment.",
+            "items": {
+                "type": "string",
+                "description": "A concise single-sentence instruction to the mobile robot describing part of the trajectory (turns, relation to landmarks)."
+            }
+        },
+        "reasoning": {
+            "type": "string",
+            "description": "A description of the reasoning for the instructions."
+        },
+        "unique_id": {
+            "type": "string",
+            "description": "The unique identifier for the trajectory provided in the prompt."
+        }
+    },
+    "required": ["instructions", "unique_id"]
+}

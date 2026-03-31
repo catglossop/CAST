@@ -1,0 +1,120 @@
+project_name: atomic_policy
+run_name: atomic_policy
+
+# training setup
+use_wandb: True # set to false if you don't want to log to wandb
+train: True
+batch_size: 16
+epochs: 200
+gpu_ids: [0]
+all_gpu_ids: [0,1]
+num_workers: 12
+lr: 1e-4
+optimizer: adamw
+clipping: False
+max_norm: 1.
+scheduler: "cosine"
+warmup: True 
+warmup_epochs: 4
+cyclic_period: 10
+plateau_patience: 3
+plateau_factor: 0.5
+seed: 0
+
+# model params
+model: atomic_model
+language_encoder: t5
+efficientnet_model: efficientnet-b2
+# UNet global_cond dim; must equal obs_encoding_size // 4 (vision encoder output). Kept in sync for readability.
+encoding_size: 128
+obs_encoding_size: 512
+lang_encoding_size: 512
+obs_encoder: efficientnet-b0
+mha_num_attention_heads: 4
+mha_num_attention_layers: 4
+mha_ff_dim_factor: 4
+vocab_size: 256
+num_tokens: 8
+dropout: 0.5
+attn_unet: False
+cond_predict_scale: False
+down_dims: [64, 128, 256]
+num_diffusion_iters: 15
+
+# normalization for the action space
+normalize: True
+context_size: 2
+
+# distance bounds for distance and action and distance predictions 
+distance:
+  min_dist_cat: 0
+  max_dist_cat: 25
+action:
+  min_dist_cat: 2
+  max_dist_cat: 25
+
+# action output params
+len_traj_pred: 8
+# dataset specific parameters
+image_size: [96, 96] # width, height
+datasets:
+  atomic_left:
+    data_folder: /path/to/atomic_dataset/turn_left/
+    train: /path/to/data_splits/atomic_left/train/ # path to train folder with traj_names.txt
+    test: /path/to/data_splits/atomic_left/test/ # path to test folder with traj_names.txt
+    end_slack: 0 # because many trajectories end in collisions
+    goals_per_obs: 1 # how many goals are sampled per observation
+    negative_mining: False # negative mining from the ViNG paper (Shah et al.)
+    weight: 1.0
+  atomic_adjust_left:
+    data_folder: /path/to/atomic_dataset/adjust_left/
+    train: /path/to/data_splits/atomic_adjust_left/train/ # path to train folder with traj_names.txt
+    test: /path/to/data_splits/atomic_adjust_left/test/ # path to test folder with traj_names.txt
+    end_slack: 0 # because many trajectories end in collisions
+    goals_per_obs: 1 # how many goals are sampled per observation
+    negative_mining: False # negative mining from the ViNG paper (Shah et al.)
+    weight: 1.0
+  atomic_right:
+    data_folder: /path/to/atomic_dataset/turn_right/
+    train: /path/to/data_splits/atomic_right/train/ # path to train folder with traj_names.txt
+    test: /path/to/data_splits/atomic_right/test/ # path to test folder with traj_names.txt
+    end_slack: 0 # because many trajectories end in collisions
+    goals_per_obs: 1 # how many goals are sampled per observation
+    negative_mining: False # negative mining from the ViNG paper (Shah et al.)
+    weight: 1.0
+  atomic_adjust_right:
+    data_folder: /path/to/atomic_dataset/adjust_right/
+    train: /path/to/data_splits/atomic_adjust_right/train/ # path to train folder with traj_names.txt
+    test: /path/to/data_splits/atomic_adjust_right/test/ # path to test folder with traj_names.txt
+    end_slack: 0 # because many trajectories end in collisions
+    goals_per_obs: 1 # how many goals are sampled per observation
+    negative_mining: False # negative mining from the ViNG paper (Shah et al.)
+    weight: 1.0
+  atomic_forward:
+    data_folder: /path/to/atomic_dataset/go_forward
+    train: /path/to/data_splits/atomic_forward/train/ # path to train folder with traj_names.txt
+    test: /path/to/data_splits/atomic_forward/test/ # path to test folder with traj_names.txt
+    end_slack: 0 # because many trajectories end in collisions
+    goals_per_obs: 1 # how many goals are sampled per observation
+    negative_mining: False # negative mining from the ViNG paper (Shah et al.)
+    weight: 1.0
+  atomic_stop:
+    data_folder: /path/to/atomic_dataset/stop
+    train: /path/to/data_splits/atomic_stop/train/ # path to train folder with traj_names.txt
+    test: /path/to/data_splits/atomic_stop/test/ # path to test folder with traj
+    end_slack: 0 # because many trajectories end in collisions
+    goals_per_obs: 1 # how many goals are sampled per observation
+    negative_mining: False # negative mining from the ViNG paper (Shah et al.)
+    weight: 1.0
+
+
+# logging stuff
+## =0 turns off
+print_log_freq: 100 # in iterations
+image_log_freq: 100 #0 # in iterations
+num_images_log: 8 #0 
+pairwise_test_freq: 0 # in epochs
+eval_fraction: 0.25
+wandb_log_freq: 10 # in iterations
+eval_freq: 1 # in epochs
+save_freq: 5 # in epochs
