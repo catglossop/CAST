@@ -23,7 +23,7 @@ def hindsight_labeling_step(config: dict) -> None:
     with open(config["hindsight_summarize_prompt"], "r") as f:
         hindsight_summarize_prompt = f.read()
 
-    os.makedirs(config["hindsight_output_dir"], exist_ok=True)
+    # os.makedirs(config["hindsight_output_dir"], exist_ok=True)
 
     hindsight_describe(config, hindsight_describe_schema, hindsight_describe_prompt)
     hindsight_summarize(config, hindsight_summarize_prompt, hindsight_summarize_schema)

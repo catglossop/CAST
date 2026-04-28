@@ -315,7 +315,10 @@ def generate_actions(config: Dict[str, Any]) -> None:
             cmds.append(command)
             context_tensors.append(context_tensor)
             last_positions.append(np.asarray(traj_data["position"][start], dtype=np.float32))  # (2,)
-            last_yaws.append(float(traj_data["yaw"][start]))
+            try:
+                last_yaws.append(float(traj_data["yaw"][start]))
+            except:
+                last_yaws.append(float(traj_data["yaw"][start][0]))
             valid_idxs.append(idx)
 
         # Now process in batches

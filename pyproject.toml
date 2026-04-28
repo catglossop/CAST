@@ -17,6 +17,8 @@ dependencies = [
 	"mlcroissant>=1.0.22",
 	"tensorflow-hub>=0.16.1",
 	"importlib-resources>=6.5.2",
+	"huggingface-hub>=1.8.0",
+	"tyro>=1.0.11",
 ]
 
 [tool.uv]

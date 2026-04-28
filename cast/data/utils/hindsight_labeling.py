@@ -51,7 +51,9 @@ def hindsight_describe(config: dict, schema: dict, prompt: str) -> None:
     """Pairwise image descriptions (VLM step of the hierarchical pipeline)."""
     job_name = "hindsight_describe"
 
-    os.makedirs(config["hindsight_output_dir"] + "/" + job_name, exist_ok=True)
+    os.makedirs(os.path.dirname(gcs_response_path_txt_for_job(config, job_name)), exist_ok=True)
+
+    # os.makedirs(config["hindsight_output_dir"] + "/" + job_name, exist_ok=True)
     client = storage.Client(project=config["gcp_project_id"])
 
     traj_paths = get_trajectory_paths(config["dataset_path"])
@@ -100,8 +102,8 @@ def hindsight_summarize(config: dict, prompt: str, schema: dict) -> None:
     keeping the same Vertex batch request layout as other CAST steps.
     """
     job_name = "hindsight_summarize"
+    os.makedirs(os.path.dirname(gcs_response_path_txt_for_job(config, job_name)), exist_ok=True)
 
-    os.makedirs(config["hindsight_output_dir"] + "/" + job_name, exist_ok=True)
     client = storage.Client(project=config["gcp_project_id"])
 
     describe_path = saved_batch_responses_path(config, "hindsight_describe")

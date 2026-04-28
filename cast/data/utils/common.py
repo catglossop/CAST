@@ -1,6 +1,7 @@
 import numpy as np
 from glob import glob
 import os
+import subprocess
 import pickle as pkl
 from PIL import Image
 from google import genai
@@ -142,19 +143,24 @@ def convert_path_to_uri(config: dict, path: str) -> str:
 
 def upload_local_data_to_bucket(config: dict) -> None:
     """
-    Upload the local data to the bucket.
+    Upload the local dataset directory to GCS using ``gcloud storage cp -r``.
+
+    Destination is ``gs://<base_uri>/`` (bucket name from config). The CLI copies
+    the dataset folder under that prefix, matching ``<dataset_name>/...`` layout
+    used elsewhere in this module.
     """
-    client = storage.Client(project=config["gcp_project_id"])
-    bucket = client.bucket(config["base_uri"])
-    dataset_name = config["dataset_path"].split("/")[-1]
-    files = [file for file in glob(config["dataset_path"] + "/**/*", recursive=True) if os.path.isfile(file)]
-    for file in files:
-        rel_path = os.path.relpath(file, config["dataset_path"])
-        blob = bucket.blob(f"{dataset_name}/{rel_path}")
-        if not blob.exists():
-            blob.upload_from_filename(file)
-        else:
-            print(f"Blob {blob.name} already exists, skipping upload")
+    dataset_path = os.path.abspath(config["dataset_path"])
+    dest = f"gs://{config['base_uri']}/"
+    cmd = [
+        "gcloud",
+        f"--project={config['gcp_project_id']}",
+        "storage",
+        "cp",
+        "-r",
+        dataset_path,
+        dest,
+    ]
+    subprocess.run(cmd, check=True)
 
 def delete_bucket_directory(bucket: storage.Bucket, directory: str) -> None:
     """
