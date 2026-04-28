@@ -1,12 +1,5 @@
 # CAST: Counterfactual Labels Improve Instruction Following in Vision-Language-Action Models
 
-[Catherine Glossop](https://catglossop.github.io/),  [William Chen](https://x.com/verityw_), [Arjun Bhorkar](https://scholar.google.com/citations?user=AGPooMYAAAAJ&hl=en), [Dhruv Shah](https://robodhruv.github.io/), [Sergey Levine](https://people.eecs.berkeley.edu/~svlevine/)
-
-## [Visit our website!](https://cast-vla.github.io)
-## [ArXiV Link](TODO)
-
-The [CAST dataset](https://huggingface.co/datasets/catglossop/CAST-dataset) and an existing [checkpoint](https://huggingface.co/catglossop/CounterfactualVLA) are available on HuggingFace. 
-
 ## Running the CAST data generation pipeline
 
 ### Setup 
